@@ -20,8 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo 'Thank you for your booking!';
   } else {
     echo 'Sorry, there was a problem sending your booking. Please try again later.';
+    header('Location: booking-confirmed.html');
   }
 }
 ?>
-header('Location: booking-confirmed.html');
+
 exit();
