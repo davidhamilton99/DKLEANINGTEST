@@ -1,28 +1,25 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // Get the form data
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
-  $date = $_POST['date'];
-  $time = $_POST['time'];
-  $guests = $_POST['guests'];
-  $comments = $_POST['comments'];
+// Get the form data
+$name = $_POST['name'];
+$email = $_POST['email'];
+$booking_date = $_POST['booking_date'];
+$booking_time = $_POST['booking_time'];
+$number_of_guests = $_POST['number_of_guests'];
+$message = $_POST['message'];
 
-  // Create the email message
-  $to = 'david.nash.hamilton@gmail.com'; // Replace with your email address
-  $subject = 'New Booking';
-  $message = "Name: $name\nEmail: $email\nPhone: $phone\nDate: $date\nTime: $time\nGuests: $guests\nComments: $comments";
+// Construct the email message
+$to = 'your-email@example.com';
+$subject = 'New booking request';
+$body = "Name: $name\nEmail: $email\nDate: $booking_date\nTime: $booking_time\nNumber of guests: $number_of_guests\nMessage: $message";
+$headers = 'From: booking-form@example.com';
 
-  // Send the email
-  $headers = "From: $email\r\n";
-  if (mail($to, $subject, $message, $headers)) {
-    echo 'Thank you for your booking!';
-  } else {
-    echo 'Sorry, there was a problem sending your booking. Please try again later.';
-    header('Location: booking-confirmed.html');
-  }
+// Send the email
+if (mail($to, $subject, $body, $headers)) {
+  // Redirect the user to the confirmation page
+  header('Location: booking-confirmed.html');
+  exit();
+} else {
+  echo 'There was an error sending the email.';
 }
 ?>
 
-exit();
